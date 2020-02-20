@@ -29,7 +29,6 @@ export default class App extends Component {
               ...snapShot.data()
             }
           });
-          console.log(this.state);
         });
       } else {
         // if userAuth doesn't exist, then set it to the current state which is null
