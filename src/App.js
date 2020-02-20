@@ -6,7 +6,7 @@ import "./App.scss";
 import HomePage from "./components/Pages/HomePage/HomePage";
 import ShopPage from "./components/Pages/Shop/Shop";
 import Header from "./components/Header/Header";
-import SignInSignOut from "./components/Pages/SignInSignOut/SignInSignOut";
+import SignInSignUp from "./components/Pages/SignInSignUp/SignInSignUp";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 export default class App extends Component {
@@ -29,6 +29,7 @@ export default class App extends Component {
               ...snapShot.data()
             }
           });
+          console.log(this.state);
         });
       } else {
         // if userAuth doesn't exist, then set it to the current state which is null
@@ -49,7 +50,7 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={SignInSignOut} />
+          <Route path="/signin" component={SignInSignUp} />
         </Switch>
       </div>
     );

@@ -12,7 +12,7 @@ export default class SignUp extends Component {
     displayName: "",
     email: "",
     password: "",
-    confirmPassWord: ""
+    confirmPassword: ""
   };
 
   handleChange = e => {
@@ -35,7 +35,7 @@ export default class SignUp extends Component {
         email,
         password
       );
-      await createUserProfileDocument(user, displayName);
+      await createUserProfileDocument(user, { displayName });
       // clear form inputs after signing up
       this.setState({
         displayName: "",
@@ -49,7 +49,7 @@ export default class SignUp extends Component {
   };
 
   render() {
-    const { displayName, email, password, confirmPassWord } = this.state;
+    const { displayName, email, password, confirmPassword } = this.state;
     return (
       <div className="sign-up">
         <h2 className="title">I do not have an account</h2>
@@ -84,7 +84,7 @@ export default class SignUp extends Component {
             name="confirmPassword"
             value={confirmPassword}
             onChange={this.handleChange}
-            label="confirmPassword"
+            label="Confirm Password"
             required
           ></FormInput>
           <CustomButton type="submit">SIGN UP</CustomButton>
