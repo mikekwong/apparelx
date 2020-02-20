@@ -7,7 +7,7 @@ import HomePage from "./components/Pages/HomePage/HomePage";
 import ShopPage from "./components/Pages/Shop/Shop";
 import Header from "./components/Header/Header";
 import SignInSignOut from "./components/Pages/SignInSignOut/SignInSignOut";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 export default class App extends Component {
   state = {
@@ -18,9 +18,22 @@ export default class App extends Component {
 
   componentDidMount() {
     // open subscription/messaging between app and firebase app
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
-      console.log(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      } else {
+        // if userAuth doesn't exist, then set it to the current state which is null
+        this.setState({ currentUser: userAuth });
+      }
     });
   }
 
