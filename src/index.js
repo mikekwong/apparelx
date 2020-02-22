@@ -5,10 +5,13 @@ import "./index.scss";
 import App from "./App";
 import logger from "redux-logger";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import store from "./redux/store";
 
-const store = createStore(store, applyMiddleWare(logger));
+// more scaleable to spread out the array in case we add future middleware
+const middlewares = [logger];
+
+const store = createStore(store, applyMiddleWare(...middlewares));
 
 ReactDOM.render(
   <Provider store={store}>
