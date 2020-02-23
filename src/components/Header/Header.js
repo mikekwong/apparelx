@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../CartIcon/CartIcon";
+import CartDropdown from "../CartDropdown/CartDropdown";
 
 // The ReactComponent import name is special and tells Create React App that you want a React component that renders an SVG, rather than its filename.
 import { ReactComponent as Logo } from "../../assets/crown.svg";
@@ -33,6 +34,7 @@ const Header = ({ currentUser }) => {
         )}
         <CartIcon />
       </div>
+      <CartDropdown />
     </div>
   );
 };
