@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import { toggleCartHidden } from "../../redux/actions";
-import { selectCartItemsCount } from "../../redux/selectors/selectors";
+import { selectCartItemsCount } from "../../redux/selectors/cartSelectors";
 
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 import "./CartIcon.scss";
@@ -15,9 +16,13 @@ const CartIcon = ({ toggleCartHidden, itemCount }) => (
 );
 
 // this function uses selector library for memoization to avoid re-render
-const mapStateToProps = state => ({
-  itemCount: selectCartItemsCount(state)
+
+const mapStateToProps = createStructuredSelector({
+  itemCount: selectCartItemsCount
 });
+// const mapStateToProps = state => ({
+//   itemCount: selectCartItemsCount(state)
+// });
 
 // const mapStateToProps = ({ cart: { cartItems } }) => ({
 //   itemCount: cartItems.reduce(
