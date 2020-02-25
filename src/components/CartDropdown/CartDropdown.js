@@ -6,9 +6,11 @@ import { withRouter } from "react-router-dom";
 import CustomButton from "../CustomButton/CustomButton";
 import CartItem from "../CartItem/CartItem";
 import { selectCartItems } from "../../redux/selectors/cartSelectors";
+import { toggleCartHidden } from "../../redux/actions";
+
 import "./CartDropdown.scss";
 
-const CartDropdown = ({ cartItems, history }) => (
+const CartDropdown = ({ cartItems, history, dispatch }) => (
   <div className="cart-dropdown">
     <div className="cart-items">
       {cartItems.length ? (
@@ -19,7 +21,13 @@ const CartDropdown = ({ cartItems, history }) => (
         <span className="empty-message">Your cart is empty</span>
       )}
     </div>
-    <CustomButton onClick={() => history.push("/checkout")}>
+    {/* dispatch prop is automatically passed into component if not explicitly called in connect below, thus we can attach it to an onClick handler below to use*/}
+    <CustomButton
+      onClick={() => {
+        history.push("/checkout");
+        dispatch(toggleCartHidden());
+      }}
+    >
       GO TO CHECKOUT
     </CustomButton>
   </div>
